@@ -1,0 +1,188 @@
+.circle{
+    opacity: 0.85;
+    height:100px;
+    width:100px;
+    border-radius: 50%;
+    border: 3px solid black;
+    /* background-image:url("https://images2.onionstatic.com/clickhole/3564/7/original/600.jpg");  */
+    background-size:contain;
+    background-repeat: repeat;
+    text-align: center;
+    padding-top: 40px;
+    margin-left: 15px;
+}
+.circle:hover {
+    opacity: 1;
+    height:100px;
+    width:100px;
+    border-radius: 50%;
+    border: 3px solid black;
+    background-image:url("https://images2.onionstatic.com/clickhole/3564/7/original/600.jpg"); 
+    background-size:contain;
+    background-repeat: repeat;
+    text-align: center;
+    padding-top: 40px;
+    margin-left: 15px;
+}
+.playlist{
+    z-index: -1;
+    width:130px;
+    margin-left: 10px;
+    float: left;
+}
+.edittrash{
+    opacity:0;
+
+}
+.circle:hover~.edittrash{
+    color:white;
+    margin-left:-20px;
+    opacity:1;
+}
+.edittrash:hover{
+    opacity:1;
+    margin-left:-20px;
+    
+    
+}
+.erase {
+    color:white;
+}
+.edit {
+    color:white;
+}
+
+ .play{
+    opacity:0;
+}
+.circle:hover .play{
+    opacity:1;
+}
+.left {
+    position: absolute;
+    top:14px;
+    left:20px;
+}
+.navbar-brand{
+    position: absolute;
+    
+    left:85px;
+}
+.modal-content{
+    color:blue;
+}
+#playlists{
+    z-index: -1;
+margin-top: 300px;
+}
+/* #navfixed{
+    position: fixed;
+} */
+#player{
+    position: fixed;
+    top:70px;
+    left:25%;
+    width:500px;
+    height:235px;
+    background-image:  url("images/player-bg.png");
+    margin: 0 auto;
+    padding-top: 10px;
+    z-index: 100;
+}
+#cd{
+    width:220px;
+    height:220px;
+    border-radius: 50%;
+    position: absolute;
+    /* top:63px; */
+    /* margin-top: 63px; */
+    margin-left: 5px;
+     background-image: url("https://images2.onionstatic.com/clickhole/3564/7/original/600.jpg"); 
+     background-size: contain;
+    
+  
+    }
+    #song-playlist{
+       margin-left: 90px;
+       
+       list-style-type: none;
+
+    }
+    audio{
+        width:200px;
+        margin-left:110px;
+    }
+    .pause{
+        margin-top: 105px;
+    }
+    @-webkit-keyframes rotating /* Safari and Chrome */ {
+        from {
+          -webkit-transform: rotate(0deg);
+          -o-transform: rotate(0deg);
+          transform: rotate(0deg);
+        }
+        to {
+          -webkit-transform: rotate(360deg);
+          -o-transform: rotate(360deg);
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes rotating {
+        from {
+          -ms-transform: rotate(0deg);
+          -moz-transform: rotate(0deg);
+          -webkit-transform: rotate(0deg);
+          -o-transform: rotate(0deg);
+          transform: rotate(0deg);
+        }
+        to {
+          -ms-transform: rotate(360deg);
+          -moz-transform: rotate(360deg);
+          -webkit-transform: rotate(360deg);
+          -o-transform: rotate(360deg);
+          transform: rotate(360deg);
+        }
+      }
+      .rotating {
+        -webkit-animation: rotating 2s linear infinite;
+        -moz-animation: rotating 2s linear infinite;
+        -ms-animation: rotating 2s linear infinite;
+        -o-animation: rotating 2s linear infinite;
+        animation: rotating 2s linear infinite;
+      }
+      .imageforthumbs{
+          position: absolute;
+          top:20px;
+          right:100px;
+          width:100px;
+          height:100px;
+          border:2px solid black;
+      }
+      .modal-body{
+          height:150px;
+        }
+        .modal-inputs{
+            position: absolute;
+            top:40px;
+            left: 100px;
+           
+
+        }
+        .input-addplaylist{
+            position: absolute;
+            top:50px;
+            left:100px;
+        }
+        .input-addsongdetails{
+            margin-left: 0px;
+        }
+        .addsongname, .addsongurl{
+            width:100px;
+        }
+        #nextadd,#editnext{
+            display:none;
+        }
+        
+
+
+

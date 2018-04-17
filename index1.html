@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <title>Document</title>
+</head>
+<body>
+		
+		<!-- <nav class="navbar navbar-light bg-light justify-content-between">
+				<span class=left>Add playlist</span>
+				<a class="navbar-brand" data-toggle="modal" data-target="#addModalpre">+</a>
+				<form class="form-inline">
+				  <input class="form-control mr-sm-2" type="search" placeholder="Search playlist" aria-label="Search">
+				  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+				</form>
+			  </nav> -->
+        <h3 id="example1">I wanna be different</h3>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+		<script type="text/javascript" src="js/jquery.arctext.js"></script>
+		<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>	
+		<script type="text/temp" id=testtemp>
+		<span>{{label}}</span>
+		</script>
+		<script>
+			obj={ label: "Manchester" };
+		var	temp=$("#testtemp").html();
+		$("body").html( Mustache.to_html( temp, obj) );
+		
+		
+		</script>
+		
+		
+		
+		<!--<script type="text/javascript"> 
+			var $headline = $('#headline').hide();
+		
+			var $word1		= $('#arc-wrapper').find('h3').hide();
+			var $word2		= $('#arc-wrapper').find('h4').hide();
+			
+			var $example1	= $('#example1').hide();
+			var $example2	= $('#example2').hide();
+			var $example3	= $('#example3').hide();
+			var $example4	= $('#example4').hide();
+			
+			google.load('webfont','1');
+			
+			google.setOnLoadCallback(function() {
+				WebFont.load({
+					google		: {
+						families	: ['Montserrat','Concert One']
+					},
+					fontactive	: function(fontFamily, fontDescription) {
+						init();
+					},
+					fontinactive	: function(fontFamily, fontDescription) {
+						init();
+					}
+				});
+			});
+			
+			function init() {
+			
+				$headline.show().arctext({radius: 400});
+					
+				$word1.show().arctext();
+				$word2.show().arctext({radius: 148, dir: -1});
+				
+				$example1.show().arctext({radius: 100});
+				$example2.show().arctext({radius: 200, dir: -1});
+				$example3.show().arctext({radius: 500, rotate: false});
+				$example4.show().arctext({radius: 300});
+				
+				$('#button_set').on('click', function() {
+					$example4.arctext('set', {
+						radius		: 140,
+						dir			: -1
+					});
+					return false;
+				});
+				$('#button_anim1').on('click', function() {
+					$example4.arctext('set', {
+						radius		: 300, 
+						dir			: -1,
+						animation	: {
+							speed	: 300,
+							easing  : 'ease-out'
+						}
+					});
+					return false;
+				});
+				$('#button_anim2').on('click', function() {
+					$example4.arctext('set', {
+						radius		: 200, 
+						dir			: 1, 
+						animation	: {
+							speed	: 300
+						}
+					});
+					return false;
+				});
+				$('#button_reset').on('click', function() {
+					$example4.arctext('set', {
+						radius		: 300, 
+						dir			: 1
+					});
+					return false;
+				});
+			
+			};
+		</script/>-->
+</body>
+</html>
