@@ -73,7 +73,7 @@
 }
 #playlists{
     z-index: -1;
-margin-top: 300px;
+margin-top: 320px;
 }
 /* #navfixed{
     position: fixed;
@@ -102,9 +102,40 @@ margin-top: 300px;
     
   
     }
+    .playing-song{
+        width:200px;
+        background-color: brown;
+
+    }
+    /* .playing-song:hover{
+        background-color: aquamarine;
+    } */
+    .pauseicon .fa-pause{
+        
+        display:none;
+    }
+    .playing-song:hover .pauseicon .fa-pause{
+        display:inline;
+        
+        
+    }
+     .play-icon{
+        
+        display:none;
+    }
+    .playing-song .play-icon{
+        
+        display:inline;
+    }
+    .playing-song:hover .play-icon .fa-play{
+        display:none;
+        height:0px;
+        background-color: blueviolet;
+    }
+    
     #song-playlist{
-       margin-left: 90px;
-       
+       margin-left: 200px;
+       text-align: left;
        list-style-type: none;
 
     }
@@ -112,9 +143,11 @@ margin-top: 300px;
         width:200px;
         margin-left:110px;
     }
-    .pause{
+    .pauseplayer{
         margin-top: 105px;
     }
+    
+    
     @-webkit-keyframes rotating /* Safari and Chrome */ {
         from {
           -webkit-transform: rotate(0deg);

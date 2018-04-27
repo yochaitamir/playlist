@@ -15,99 +15,95 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="js/main.js"></script>
 
-<link rel="stylesheet" type="text/css" href="css/style.css" />
-<link href='http://fonts.googleapis.com/css?family=Montserrat|Sail|Concert+One' rel='stylesheet' type='text/css' />
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <link href='http://fonts.googleapis.com/css?family=Montserrat|Sail|Concert+One' rel='stylesheet' type='text/css' />
+  <script type="text/javascript" src="js/audioplayer.js"></script>
 
-
-<link rel="stylesheet" href="main.css">
-<style>
-  body {
-    background-color: grey;
-    color: #fff;
-    font-family: arial;
-    text-align: center
-  }
-</style>
+  <link rel="stylesheet" href="main.css">
+  <style>
+    body {
+      background-color: grey;
+      color: #fff;
+      font-family: arial;
+      text-align: center
+    }
+  </style>
 </head>
 
 <body>
-    
 
+  
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
   <script type="text/javascript" src="js/jquery.arctext.js"></script>
   <script type="text/javascript" src="http://www.google.com/jsapi"></script>
   <nav id=navfixed class="navbar navbar-default navbar-fixed-top">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-        <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-        <a href="#" class="navbar-brand">Brand</a>
+      <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
     </div>
     <!-- Collection of nav links, forms, and other content for toggling -->
     <div id="navbarCollapse" class="collapse navbar-collapse">
-        <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#">Profile</a></li>
-            <li class="dropdown">
-                <a data-toggle="dropdown" class="dropdown-toggle" href="#">Messages <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li><a href="#">Inbox</a></li>
-                    <li><a href="#">Drafts</a></li>
-                    <li><a href="#">Sent Items</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#">Trash</a></li>
-                </ul>
-            </li>
-        </ul>
-        <form class="navbar-form navbar-left">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search">
-                <span class="input-group-btn">
-                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
-                </span>
-            </div>
-        </form>
-        <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Login</a></li>
-        </ul>
+      <ul class="nav navbar-nav">
+        <li class="active">
+          <a href="#" data-toggle="modal" data-target="#addModalpre">add playlist +</a>
+        </li>
+
+      </ul>
+      <form class="navbar-form navbar-left">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search">
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default">
+              <span class="glyphicon glyphicon-search"></span>
+            </button>
+          </span>
+        </div>
+      </form>
+
     </div>
-</nav>
-  <!-- <nav class="navbar navbar-light bg-light justify-content-between">
+  </nav>
+  <nav class="navbar navbar-light bg-light justify-content-between">
     <span class=left>Add playlist</span>
     <a class="navbar-brand" data-toggle="modal" data-target="#addModalpre" id="addsonglist">+</a>
     <form class="form-inline">
       <input class="form-control mr-sm-2" type="search" placeholder="Search playlist" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
-    </nav> -->
-    <div>
+    </nav> 
+    <script>
+   
+    </script>
+  <div>
     <div id='player'>
       <div id="cd" class="rotating">
 
-        <i class="fas fa-pause pause" style="color:black"></i>
+        <i class="fas fa-pause pauseplayer" style="color:black"></i>
       </div>
-      <audio controls>
-        <source src="horse.ogg" type="audio/ogg">
-        <source src="horse.mp3" type="audio/mpeg"> Your browser does not support the audio element.
+      <audio id="my_audio" controls>
+        
+        <!-- <source id="My_source" src="audiosongs\40StairwayToHeaven.mp3" type="audio/mpeg"> -->
+         <!-- <source id="My_source" src="https://ia800502.us.archive.org/16/items/StairwayToHeaven_886/40StairwayToHeaven.mp3" type="audio/mpeg">  -->
       </audio>
       <ul id="song-playlist">
-        <li>song1</li>
+        
       </ul>
     </div>
   </div>
 
-  
-  <div  class="container">
+
+  <div class="container">
     <!--<h2>Modal Example</h2>
            Trigger the modal with a button 
           <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#eraseModal">Open Modal</button>-->
 
     <!-- Modal -->
-  
+
     <div class="modal fade" id="addModalpre" role="dialog">
       <div class="modal-dialog">
 
@@ -119,17 +115,19 @@
           </div>
           <div class="modal-body">
             <div class="input-addplaylist">
-             <label>
-               playlist name
-             </label> 
-            <input type="text" id="playlistname" value="Playlist name"><br>
-            <label>
+              <label>
+                playlist name
+              </label>
+              <input type="text" id="playlistname" value="Playlist name">
+              <br>
+              <label>
                 playlist image
               </label>
-            <input type="text" id="imageurl" value="https://upload.wikimedia.org/wikipedia/commons/6/60/Rooster_portrait2.jpg"><br>
-            <input type="button" value="load name & image" id="valimg">
-          </div>
-          
+              <input type="text" id="imageurl" value="https://upload.wikimedia.org/wikipedia/commons/6/60/Rooster_portrait2.jpg">
+              <br>
+              <input type="button" value="load name & image" id="valimg">
+            </div>
+
             <image class="imageforthumbs"></image>
           </div>
           <div class="modal-footer">
@@ -141,7 +139,7 @@
       </div>
     </div>
 
-    
+
   </div>
   <!-- <script>
   $( "#imageurl" ).keypress(function() {
@@ -164,12 +162,12 @@
           </div>
           <input type=button id="addsonginput" value="add song">
           <div class="modal-body input-addsongdetails" id=addsongsdiv>
-              
-            
+
+
           </div>
-          
+
           <div class="modal-footer">
-              <button type="button" id="savesongs" class="btn btn-default" data-dismiss="modal">save</button>
+            <button type="button" id="savesongs" class="btn btn-default" data-dismiss="modal">save</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           </div>
         </div>
@@ -195,12 +193,12 @@
           </div>
           <input type=button id="editsonginput" value="add song">
           <div class="modal-body input-addsongdetails" id="editsongsdiv" data-i="">
-              
-            
+
+
           </div>
-          
+
           <div class="modal-footer">
-              <button type="button" id="saveeditedsongs" class="btn btn-default" data-id="" data-dismiss="modal">save</button>
+            <button type="button" id="saveeditedsongs" class="btn btn-default" data-id="" data-dismiss="modal">save</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           </div>
         </div>
@@ -210,51 +208,48 @@
 
   </div>
   <script>
-    
-  //   $( "#addsonginput" ).click( function() {
-    
-  //   var addsong="<div class=songsdetails>"+"<button class='removesong'>x</button>"+"<label>"+
-  //  " add song name:"+"</label><input class='addsongname'><label>"+
-  //  " add song url:"+"</label><input class='addsongurl'></div><br>"
-  //  $("#addsongsdiv").append(addsong);
-  // });
-  // $( "#editsonginput" ).click( function() {
-    
-  //   var addsong="<div class=songsdetails>"+"<button class='removesong'>x</button>"+"<label>"+
-  //  " add song name:"+"</label><input class='addsongname'><label>"+
-  //  " add song url:"+"</label><input class='addsongurl'></div><br>"
-  //  $("#editsongsdiv").append(addsong);
-  // });
-  
-  
+    //   $( "#addsonginput" ).click( function() {
+
+    //   var addsong="<div class=songsdetails>"+"<button class='removesong'>x</button>"+"<label>"+
+    //  " add song name:"+"</label><input class='addsongname'><label>"+
+    //  " add song url:"+"</label><input class='addsongurl'></div><br>"
+    //  $("#addsongsdiv").append(addsong);
+    // });
+    // $( "#editsonginput" ).click( function() {
+
+    //   var addsong="<div class=songsdetails>"+"<button class='removesong'>x</button>"+"<label>"+
+    //  " add song name:"+"</label><input class='addsongname'><label>"+
+    //  " add song url:"+"</label><input class='addsongurl'></div><br>"
+    //  $("#editsongsdiv").append(addsong);
+    // });
   </script>
   <div class="container">
-      <!--<h2>Modal Example</h2>
+    <!--<h2>Modal Example</h2>
              Trigger the modal with a button 
             <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#eraseModal">Open Modal</button>-->
-  
-      <!-- Modal -->
-      <div class="modal fade" id="eraseModal" role="dialog">
-        <div class="modal-dialog">
-  
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title" style="color: black">Modal Header</h4>
-            </div>
-            <div class="modal-body">
-              <p>are you sure you want to remove this playlist</p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal" id="removeanyway">remove</button>
-            </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="eraseModal" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title" style="color: black">Modal Header</h4>
           </div>
-  
+          <div class="modal-body">
+            <p>are you sure you want to remove this playlist</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" id="removeanyway">remove</button>
+          </div>
         </div>
+
       </div>
-  
     </div>
+
+  </div>
   <div class="container">
     <!--<h2>Modal Example</h2>
              Trigger the modal with a button 
@@ -272,17 +267,19 @@
           </div>
           <div class="modal-body">
             <div class="input-addplaylist">
-             <label>
-               playlist name
-             </label> 
-            <input type="text" id="editplaylistname" data-id=""><br>
-            <label>
+              <label>
+                playlist name
+              </label>
+              <input type="text" id="editplaylistname" data-id="">
+              <br>
+              <label>
                 playlist image
               </label>
-            <input type="text" id="editimageurl" value="https://upload.wikimedia.org/wikipedia/commons/6/60/Rooster_portrait2.jpg"><br>
-            <input type="button" value="load name & image" id="editvalimg">
-          </div>
-          
+              <input type="text" id="editimageurl" value="https://upload.wikimedia.org/wikipedia/commons/6/60/Rooster_portrait2.jpg">
+              <br>
+              <input type="button" value="load name & image" id="editvalimg">
+            </div>
+
             <image class="imageforthumbs"></image>
           </div>
           <div class="modal-footer">
@@ -295,21 +292,21 @@
     </div>
 
   </div>
-  
-<div id=test></div>
+
+  <div id=test></div>
   <div id="playlists">
-    
-        <script type="text/temp" id="playlisttemplate">
-     
+
+    <script type="text/temp" id="playlisttemplate">
+
 
       <div class=playlist data-id="{{id}}">
-        
+
         <span class="example1">{{name}}</span>
         <div class="circle" style="background-image:url({{image}})">
-          <i class="fas fa-play play" style="color:black"></i>
+          <i class="fas fa-play play playstart" style="color:black"></i>
         </div>
         <div class=edittrash data-id="{{id}}">
-          <i class="fas fa-play play" style="color:black"></i>
+          
           <a data-toggle="modal" data-target="#eraseModal">
             <i class="far fa-trash-alt erase"></i>
           </a>
@@ -320,24 +317,10 @@
       </div>
     </script>
   </div>
-<script>
-  // var data=[{name:"yochai",image1:"1"},{name:"yoni",image1:"2",}]
-//   var playlisttemplate=$("#playlisttemplate").html() 
-// console.log(playlisttemplate);
-// $.get("http://localhost/playlist/api//playlist", function(data, status){
-//     //alert("Data: " + data + "\nStatus: " + status);
-//     $.each(data, function( index, playlist ) {
-//       console.log(playlist) ; 
-//       $.each(playlist, function( index, playlis ) {
-//     //var temp=$("#playlists").html(Mustache.to_html(playlisttemplate,playlis));
-//     $('#playlists').append(Mustache.render(playlisttemplate, playlis));
-//     console.log(playlis)
-//     //$("body").html( Mustache.to_html( temp, obj) );
-//   });
-// }); 
-// }
-// );
-</script>
+  <script>
    
-  </body> 
-    </html>
+  </script>
+
+</body>
+
+</html>

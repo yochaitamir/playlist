@@ -10,7 +10,7 @@ $(document).ready(function rend() {
       $.each(playlist, function (index, playlis) {
         //var temp=$("#playlists").html(Mustache.to_html(playlisttemplate,playlis));
         $('#playlists').append(Mustache.render(playlisttemplate, playlis));
-        console.log(playlis);
+        
         //$("body").html( Mustache.to_html( temp, obj) );
       });
     });
