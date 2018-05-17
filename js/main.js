@@ -1,4 +1,5 @@
 $(document).ready(function rend() {
+  
   var updateSongs = false;
   console.log("ready!");
   var playlisttemplate = $("#playlisttemplate").html()
@@ -75,13 +76,27 @@ $(document).ready(function rend() {
     $(this).parent().remove();
 
   });
+  $("#editsongsdiv").on("click", ".removesong", function () {
+    $(this).parent().remove();
+
+  });
   $("#playlists").on("click", ".erase", function () {
+    dataid = $(this).parent().parent().parent().data("id");
     var thielem = $(this).parent().parent().parent();
-    var dataid = $(this).parent().parent().attr("data-id");
+    
     removeaffirm(thielem, dataid);
 
     console.log(dataid)
   });
+  $("#playerdelete").click(function(){
+    dataid = $(this).parent().parent().parent().data("id");
+    var elem=$('.playlist')
+ var thielem = $('.playlist[data-id=' + dataid + ']');
+ removeaffirm(thielem, dataid);
+    console.log(thielem);
+  })
+
+
   removeaffirm = function (thielem, dataid) {
     var dataf = {
       'x': thielem,
@@ -92,7 +107,7 @@ $(document).ready(function rend() {
     $("#removeanyway").bind("click", dataf, function (e) {
 
 
-      //console.log(thielem)  
+       
       dataf.x.remove();
       $.ajax({
         url: "http://localhost/playlist/api/playlist/" + dataf.y,
@@ -104,10 +119,14 @@ $(document).ready(function rend() {
 
     });
   }
+
   
   $("#playlists").on("click", ".editlist", function () {
     
     var dataid = $(this).parent().attr("data-id");
+    editList(dataid);
+  })
+    function editList(dataid){
     $.get("http://localhost/playlist/api/playlist/"+dataid, function (data, status) {
     
     $.each(data, function (index, playlist) {
@@ -122,7 +141,11 @@ $(document).ready(function rend() {
     
     
   });
-})
+    }
+// })
+
+
+  
     $("#editvalimg").click(function(){
       var name=$("#editplaylistname").val();
       var image=$("#editimageurl").val();
@@ -165,6 +188,7 @@ $(document).ready(function rend() {
       
 
       function editSongs(id){
+        $("#editsongsdiv").empty();
         console.log(id);
         $("#editsongsdiv").attr("i", id); 
         var editsongid= $("#editsongsdiv").attr("i");
@@ -184,7 +208,7 @@ $(document).ready(function rend() {
         });
       }
       $("#saveeditedsongs").click(function () {
-        console.log('editid');
+        
         var editid=$(this).parent().prev().attr("i");
         console.log(editid);
         
@@ -194,11 +218,16 @@ $(document).ready(function rend() {
         $(".songsdetails").each(function () {
           var name = $(this).find(".addsongname").val();
           var url = $(this).find(".addsongurl").val();
+          mp3url = /^https?:\/\/(?:[a-z0-9\-]+\.)+[a-z]{2,6}(?:\/[^\/#?]+)+\.(?:mp3)$/i;
+          if(!mp3url.test(url)){
+            return console.log("cant save edit");
+          }
           songArray.push({
             'name': name,
             'url': url
           });
-          //console.log(updateSongs);
+          
+         
     
         });
         $.post("http://localhost/playlist/api/playlist/"+editid+"/songs", {
@@ -211,9 +240,10 @@ $(document).ready(function rend() {
       
         $(".songsdetails").remove();
       });
+      
     
       $( "#addsonginput" ).click( function() {
-    
+        
         var addsong="<div class=songsdetails>"+"<button class='removesong'>x</button>"+"<label>"+
        " add song name:"+"</label><input class='addsongname'><label>"+
        " add song url:"+"</label><input class='addsongurl'></div><br>"
@@ -226,6 +256,32 @@ $(document).ready(function rend() {
        " add song url:"+"</label><input class='addsongurl'></div><br>"
        $("#editsongsdiv").append(addsong);
       });
+      $("#editsongsdiv").on("change", ".addsongurl", function () {
+        mp3url = /^https?:\/\/(?:[a-z0-9\-]+\.)+[a-z]{2,6}(?:\/[^\/#?]+)+\.(?:mp3)$/i;
+        url=$(this).val()
+        console.log(mp3url.test(url))
+        if(mp3url.test(url)){
+          $(this).css("background-color","white");
+         alert ("success");
+        //  saveeditedsongs=true;
+        //  return saveeditedsongs;
+       }
+       else{
+         $(this).css("background-color","red");
+         alert("fail");
+        //  saveeditedsongs=false;
+        //  return saveeditedsongs;
+       }
+        
+        
+      });
+      $(".playereditlist").click( function () {
+    
+        var dataid = $(this).parent().parent().parent().data("id");
+        console.log(dataid);
+        editList(dataid);
+      }) 
+     
       
 
 

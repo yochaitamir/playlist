@@ -24,6 +24,11 @@
     padding-top: 40px;
     margin-left: 15px;
 }
+#playlistname{
+    position: absolute;
+    top:-20px;
+    left:220px;
+}
 .playlist{
     z-index: -1;
     width:130px;
@@ -71,9 +76,23 @@
 .modal-content{
     color:blue;
 }
+
 #playlists{
+    transition-property: all;
+	transition-duration: .5s;
+	transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
     z-index: -1;
 margin-top: 320px;
+}
+ #playlists.martop{
+    transition-property: all;
+	transition-duration: .5s;
+	transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+    width:100%;
+    height: 100%;
+    
+    
+    margin-top: 100px; 
 }
 /* #navfixed{
     position: fixed;
@@ -82,12 +101,13 @@ margin-top: 320px;
     position: fixed;
     top:70px;
     left:25%;
-    width:500px;
+    width:502px;
     height:235px;
     background-image:  url("images/player-bg.png");
     margin: 0 auto;
     padding-top: 10px;
     z-index: 100;
+    float: left;
 }
 #cd{
     width:220px;
@@ -102,41 +122,84 @@ margin-top: 320px;
     
   
     }
+    #winclose{
+        position: absolute;
+        left:450px;
+        top:50px;
+    }
     .playing-song{
         width:200px;
         background-color: brown;
 
     }
+    
+    #editeraseplayer{
+        
+        position: absolute;
+        top:100px;
+        left:505px;;
+        
+        
+    }
     /* .playing-song:hover{
         background-color: aquamarine;
     } */
-    .pauseicon .fa-pause{
+    
+     .pauseicon .fa-pause{
         
         display:none;
     }
-    .playing-song:hover .pauseicon .fa-pause{
+    .song-on-pause .pauseicon .fa-pause{
+        display:inline;
+        
+       
+    }
+    
+    .playing-song:hover .fa-pause{
         display:inline;
         
         
     }
-     .play-icon{
-        
-        display:none;
-    }
-    .playing-song .play-icon{
+    .playing-song .play-icon .fa-play{
         
         display:inline;
     }
     .playing-song:hover .play-icon .fa-play{
         display:none;
-        height:0px;
-        background-color: blueviolet;
+        
+        
+    }
+     .play-icon .fa-play{
+        
+        display:none;
+    }
+    
+    .song-on-pause:hover .fa-pause{
+        display:none;
+        
+        
+    }
+    
+    .song-on-pause:hover .play-icon .fa-play{
+        display:inline;
+        
+        
+    }
+    .song-on-pause .play-icon .fa-play{
+        display:none;
+        
+        
+    }
+    #holeplayer{
+        width:520px;
     }
     
     #song-playlist{
+    width: 300px;
        margin-left: 200px;
        text-align: left;
        list-style-type: none;
+       float:left;
 
     }
     audio{
@@ -214,6 +277,10 @@ margin-top: 320px;
         }
         #nextadd,#editnext{
             display:none;
+        }
+        #editsongsdiv{
+            height:200px;
+            overflow: auto;
         }
         
 

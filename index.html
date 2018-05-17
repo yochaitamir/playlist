@@ -14,7 +14,10 @@
     crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="js/main.js"></script>
-
+  <script
+  src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
+  integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="
+  crossorigin="anonymous"></script>
   <link rel="stylesheet" type="text/css" href="css/style.css" />
   <link href='http://fonts.googleapis.com/css?family=Montserrat|Sail|Concert+One' rel='stylesheet' type='text/css' />
   <script type="text/javascript" src="js/audioplayer.js"></script>
@@ -32,10 +35,12 @@
 
 <body>
 
-  
+  <input id="songnum" type=hidden value=0> 
+   <input id="songstoplay" type=hidden data-arr=[] value=[]>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
   <script type="text/javascript" src="js/jquery.arctext.js"></script>
   <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+  
   <nav id=navfixed class="navbar navbar-default navbar-fixed-top">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -79,9 +84,23 @@
     <script>
    
     </script>
-  <div>
-    <div id='player'>
+  <div id=holeplayer data-id="">
+    
+    <div id='player' >
+      <span id=winclose><i class="fas fa-window-close"></i></span>
+        <div id=editeraseplayer >
+    
+            <a data-toggle="modal" data-target="#eraseModal" id="playerdelete">
+            <i class="far fa-trash-alt playererase"></i>
+          </a>
+          <a class="playereditlist" data-toggle="modal" data-target="#editModal">
+            <i class=" far fa-edit playeredit"></i>
+          </a>
+        
+        </div>
+        <p id=playlistname></p>
       <div id="cd" class="rotating">
+        
 
         <i class="fas fa-pause pauseplayer" style="color:black"></i>
       </div>
@@ -90,11 +109,24 @@
         <!-- <source id="My_source" src="audiosongs\40StairwayToHeaven.mp3" type="audio/mpeg"> -->
          <!-- <source id="My_source" src="https://ia800502.us.archive.org/16/items/StairwayToHeaven_886/40StairwayToHeaven.mp3" type="audio/mpeg">  -->
       </audio>
+      <p id=songname></p>
+      <div id=songplaylistholder>
       <ul id="song-playlist">
         
       </ul>
     </div>
+      
+      
+      
+    </div>
+    
+    
+    
+    
+    
   </div>
+  
+  
 
 
   <div class="container">
