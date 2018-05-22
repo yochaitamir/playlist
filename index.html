@@ -34,7 +34,7 @@
 </head>
 
 <body>
-
+  <input id="current" type=hidden data-current=true>
   <input id="songnum" type=hidden value=0> 
    <input id="songstoplay" type=hidden data-arr=[] value=[]>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
@@ -98,7 +98,7 @@
           </a>
         
         </div>
-        <p id=playlistname></p>
+        <p id=playlistnametop></p>
       <div id="cd" class="rotating">
         
 
@@ -239,22 +239,7 @@
     </div>
 
   </div>
-  <script>
-    //   $( "#addsonginput" ).click( function() {
-
-    //   var addsong="<div class=songsdetails>"+"<button class='removesong'>x</button>"+"<label>"+
-    //  " add song name:"+"</label><input class='addsongname'><label>"+
-    //  " add song url:"+"</label><input class='addsongurl'></div><br>"
-    //  $("#addsongsdiv").append(addsong);
-    // });
-    // $( "#editsonginput" ).click( function() {
-
-    //   var addsong="<div class=songsdetails>"+"<button class='removesong'>x</button>"+"<label>"+
-    //  " add song name:"+"</label><input class='addsongname'><label>"+
-    //  " add song url:"+"</label><input class='addsongurl'></div><br>"
-    //  $("#editsongsdiv").append(addsong);
-    // });
-  </script>
+  
   <div class="container">
     <!--<h2>Modal Example</h2>
              Trigger the modal with a button 

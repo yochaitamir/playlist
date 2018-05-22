@@ -9,6 +9,7 @@ $(document).ready(function rend() {
     $.each(data, function (index, playlist) {
       //console.log(playlist);
       $.each(playlist, function (index, playlis) {
+        console.log(playlis);
         //var temp=$("#playlists").html(Mustache.to_html(playlisttemplate,playlis));
         $('#playlists').append(Mustache.render(playlisttemplate, playlis));
         
@@ -40,34 +41,69 @@ $(document).ready(function rend() {
     
     
   });
-
+  $("#addsongsdiv").on("change", ".addsongurl", function () {
+    mp3url = /^https?:\/\/(?:[a-z0-9\-]+\.)+[a-z]{2,6}(?:\/[^\/#?]+)+\.(?:mp3)$/i;
+    url=$(this).val()
+    
+    if(mp3url.test(url)){
+      $(this).css("background-color","white");
+     alert ("success");
+    
+   }
+   else{
+     $(this).css("background-color","red");
+     alert("fail");
+    
+   }
+    
+    
+  });
 
   $("#savesongs").click(function () {
     var VAL = $("#imageurl").val();
     var listname = $("#playlistname").val();
     var songArray = [];
-
-
     $(".songsdetails").each(function (index) {
       var name = $(this).find(".addsongname").val();
       var url = $(this).find(".addsongurl").val();
+      
+      mp3url = /^https?:\/\/(?:[a-z0-9\-]+\.)+[a-z]{2,6}(?:\/[^\/#?]+)+\.(?:mp3)$/i;
+      if(!mp3url.test(url)){
+        return console.log("cant save edit");
+      }
+      //songsUrl.push(url);
       songArray.push({
         'name': name,
         'url': url
       });
-      //console.log(updateSongs);
+       
+     
+     
 
     });
+    
+    // $(".songsdetails").each(function (index) {
+    //   var name = $(this).find(".addsongname").val();
+    //   var url = $(this).find(".addsongurl").val();
+      
+    //   songArray.push({
+    //     'name': name,
+    //     'url': url
+    //   });
+    //   console.log(songArray);
+
+    // });
     $.post("http://localhost/playlist/api/playlist", {
       "name": listname,
       "image": VAL,
       "songs": songArray
     }, function (result) {
       data = {
-        "id": result,
+        'id': result.data.id,
         'name': listname,
         'image': VAL
       };
+      
       $('#playlists').append(Mustache.render(playlisttemplate, data));
     });
     $(".songsdetails").remove();
@@ -122,9 +158,10 @@ $(document).ready(function rend() {
 
   
   $("#playlists").on("click", ".editlist", function () {
-    
+    console.log(this);
     var dataid = $(this).parent().attr("data-id");
     editList(dataid);
+    console.log($( "#editplaylistname" ).data( "id" ))
   })
     function editList(dataid){
     $.get("http://localhost/playlist/api/playlist/"+dataid, function (data, status) {
@@ -135,22 +172,29 @@ $(document).ready(function rend() {
     $("#editimageurl").val(playlist.image);
     $(".imageforthumbs").attr("src",playlist.image);
     $( "#editplaylistname" ).data( "id", playlist.id )  
-    console.log($( "#editplaylistname" ).data( "id" ))
+    
     })
     ;
     
     
   });
-    }
+  }
 // })
 
 
   
     $("#editvalimg").click(function(){
+      var editcurrent=$("#current").data('current');
+        var editid=$(this).parent().prev().attr("i");
       var name=$("#editplaylistname").val();
       var image=$("#editimageurl").val();
       if (imageval(image)) {
-        //$("#editplaylistname").val();
+        var playerId=$("#holeplayer").data('id');
+        
+          $("#cd").css("background-image",'url(' + image + ')');
+          $("#playlistnametop").html(name);
+
+        
         
         alert('Great, you entered an image url');
         $(".imageforthumbs").attr("src", image);
@@ -170,21 +214,34 @@ $(document).ready(function rend() {
           w=$(this).data("id");
           
          if(s==w){
-          console.log("in"); 
-          $(this).find('span').text(name);
+          $(this).find('span').addClass('curve');
+         $(this).find('span').html(name).addClass('curve');
+         $('#playlists').find(".curve").arctext({radius:60});
           $(this).find(".circle").css('background-image', 'url(' + image + ')');
           $("#editnext").show();
-          return editSongs(w);
+          console.log(w);
+          editSongs(w);
+          // var editcurrent=false;
+           
+          //  $("#current").data('current',editcurrent);
+        
+           
         }
+        
         })
+        
         
       } else {
         //$("#editnext").hide();
         $(".imageforthumbs").attr("src", image);
         alert(' you must enter an image url');
-      }});
+      }
       
-
+      
+      
+    });
+      
+    $(".example1").arctext({radius:60});
       
 
       function editSongs(id){
@@ -208,39 +265,62 @@ $(document).ready(function rend() {
         });
       }
       $("#saveeditedsongs").click(function () {
-        
+        var editcurrent=$("#current").data('current');
         var editid=$(this).parent().prev().attr("i");
-        console.log(editid);
+        console.log(editcurrent);
         
         var songArray = [];
-    
-    
-        $(".songsdetails").each(function () {
+        var songsUrl=[]
+        var playerId=$("#holeplayer").data('id');
+        if(!editcurrent||editid==playerId){
+        $('#song-playlist').empty()
+        }
+        $(".songsdetails").each(function (index) {
           var name = $(this).find(".addsongname").val();
           var url = $(this).find(".addsongurl").val();
+          
           mp3url = /^https?:\/\/(?:[a-z0-9\-]+\.)+[a-z]{2,6}(?:\/[^\/#?]+)+\.(?:mp3)$/i;
           if(!mp3url.test(url)){
             return console.log("cant save edit");
           }
+          songsUrl.push(url);
           songArray.push({
             'name': name,
             'url': url
           });
-          
+           
+          if(!editcurrent||editid==playerId){
+          $("#song-playlist").append("<div><span class='pauseicon' data-songnum=" + index + " ><i class='fas fa-pause' style='color:black'></i></span><span class='play-icon' data-songnum=" + index + "><i class='fas fa-play' ></i></span><span class='songlink' data-songnum=" + index + " data-song=" + url + ">" + name + "</span></div>");
+          }
          
     
         });
+        if(!editcurrent||editid==playerId){
+          $('span[data-songnum]').parent().removeClass("playing-song");
+          editcurrent=true;
+          $("#current").data('current',editcurrent);
+          $("#songstoplay").data('arr',songsUrl)
+        playingsongarray=$("#songstoplay").data('arr');
+        playingsrc=$("#sound_src").attr("src");
+        songindex=playingsongarray.indexOf( playingsrc );
+        $('span[data-songnum=' + songindex + ']').parent().addClass("playing-song");
+        if(songindex==-1){
+          $("#my_audio").trigger('pause');
+        }
+        
+        }
+        
         $.post("http://localhost/playlist/api/playlist/"+editid+"/songs", {
           
           "songs": songArray
         }, function (data) {
           
-         console.log(data);
+          console.log("posting")
         });
       
         $(".songsdetails").remove();
       });
-      
+    
     
       $( "#addsonginput" ).click( function() {
         
@@ -259,7 +339,7 @@ $(document).ready(function rend() {
       $("#editsongsdiv").on("change", ".addsongurl", function () {
         mp3url = /^https?:\/\/(?:[a-z0-9\-]+\.)+[a-z]{2,6}(?:\/[^\/#?]+)+\.(?:mp3)$/i;
         url=$(this).val()
-        console.log(mp3url.test(url))
+        
         if(mp3url.test(url)){
           $(this).css("background-color","white");
          alert ("success");
@@ -278,8 +358,12 @@ $(document).ready(function rend() {
       $(".playereditlist").click( function () {
     
         var dataid = $(this).parent().parent().parent().data("id");
-        console.log(dataid);
+        
+        var editcurrent=false
+        $("#current").data('current',editcurrent);;
         editList(dataid);
+        console.log(editcurrent);
+        
       }) 
      
       

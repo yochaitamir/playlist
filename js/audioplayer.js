@@ -44,8 +44,9 @@ $(document).ready(function () {
                         //    $("#my_audio").html("<source src="+songdetails.url+" type='audio/mpeg'></source>" );
 
                         songstoplay.push(songdetails.url);
-                        
-                        $("#song-playlist").append("<div><span class='pauseicon' data-songnum=" + index + " ><i class='fas fa-pause' style='color:black'></i></span><span class='play-icon' data-songnum=" + index + "><i class='fas fa-play' ></i></span><span class='songlink' data-songnum=" + index + " data-song=" + songdetails.url + ">" + songdetails.name + "</span></div>");
+                        var name=songdetails.name
+                        var url=songdetails.url
+                        $("#song-playlist").append("<div><span class='pauseicon' data-songnum=" + index + " ><i class='fas fa-pause' style='color:black'></i></span><span class='play-icon' data-songnum=" + index + "><i class='fas fa-play' ></i></span><span class='songlink' data-songnum=" + index + " data-song=" + url + ">" + name + "</span></div>");
                     });
                     
 
@@ -69,9 +70,17 @@ $(document).ready(function () {
             $("#songname").html(songname)
             $("#my_audio").trigger('load');
             $("#my_audio").trigger('play');
+        });
             
-            $(".songlink").click(function () {
-
+    }
+    
+    
+    $("#song-playlist").on("click",".songlink" ,function () {
+                var arr=$("#songstoplay").data('arr');
+                
+                console.log(arr);
+                console.log("click");
+                songnum=$("#songnum").val()
                 var songname=$(this).text()
                 $("#songname").html(songname)
                
@@ -100,7 +109,7 @@ $(document).ready(function () {
             })
             
             
-            $(".pauseicon").click(function () {
+            $("#song-playlist").on("click",".pauseicon" ,function () {
                 if ($(this).parent().hasClass("playing-song")) {
                     $("#my_audio").trigger('pause');
                     $('span[data-songnum=' + songnum + ']').parent().removeClass("playing-song");
@@ -114,7 +123,7 @@ $(document).ready(function () {
                 // }
             })
             
-            $(".play-icon").click(function () {
+            $("#song-playlist").on("click",".play-icon" ,function () {
                 if ($(this).parent().hasClass("song-on-pause")) {
                     $("#my_audio").trigger('play');
                     $('span[data-songnum=' + songnum + ']').parent().removeClass("song-on-pause");
@@ -128,12 +137,9 @@ $(document).ready(function () {
                 // }
             })
 
-
-            
-
-           
-        });
-    }
+        
+      
+     
     $('#my_audio').on('ended', function () {
         arr=$("#songstoplay").data('arr');
         console.log(songstoplay);
