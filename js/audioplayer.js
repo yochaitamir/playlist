@@ -21,7 +21,7 @@ $(document).ready(function () {
         $.get("http://localhost/playlist/api/playlist/" + chosenplaylist,  function (data) {
             cdImage(data.data.image);
             console.log(data.data.name);
-            $("#playlistname").html(data.data.name);
+            $("#playlistnametop").text(data.data.name);
             
     })
         function cdImage(image){
@@ -77,7 +77,11 @@ $(document).ready(function () {
     
     $("#song-playlist").on("click",".songlink" ,function () {
                 var arr=$("#songstoplay").data('arr');
-                
+                if($("#cd").hasClass("rotating")){
+
+                }else{
+                    $("#cd").addClass("rotating");
+                }
                 console.log(arr);
                 console.log("click");
                 songnum=$("#songnum").val()
@@ -114,7 +118,7 @@ $(document).ready(function () {
                     $("#my_audio").trigger('pause');
                     $('span[data-songnum=' + songnum + ']').parent().removeClass("playing-song");
                     $('span[data-songnum=' + songnum + ']').parent().addClass("song-on-pause");
-
+                    $("#cd").removeClass("rotating");
                 } //else if ($(this).parent().hasClass("song-on-pause")) {
                 //     //$("#my_audio").trigger('load');
                 //     $("#my_audio").trigger('play');
@@ -128,7 +132,7 @@ $(document).ready(function () {
                     $("#my_audio").trigger('play');
                     $('span[data-songnum=' + songnum + ']').parent().removeClass("song-on-pause");
                     $('span[data-songnum=' + songnum + ']').parent().addClass("playing-song");
-
+                    $("#cd").addClass("rotating");
                  } //else if ($(this).parent().hasClass("song-on-pause")) {
                 //     //$("#my_audio").trigger('load');
                 //     $("#my_audio").trigger('play');

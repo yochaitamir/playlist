@@ -82,17 +82,7 @@ $(document).ready(function rend() {
 
     });
     
-    // $(".songsdetails").each(function (index) {
-    //   var name = $(this).find(".addsongname").val();
-    //   var url = $(this).find(".addsongurl").val();
-      
-    //   songArray.push({
-    //     'name': name,
-    //     'url': url
-    //   });
-    //   console.log(songArray);
-
-    // });
+    if(songArray.length>0){
     $.post("http://localhost/playlist/api/playlist", {
       "name": listname,
       "image": VAL,
@@ -106,6 +96,11 @@ $(document).ready(function rend() {
       
       $('#playlists').append(Mustache.render(playlisttemplate, data));
     });
+  }
+  else{
+
+   return alert("there must be at list one song");
+  }
     $(".songsdetails").remove();
   });
   $("#addsongsdiv").on("click", ".removesong", function () {
@@ -134,6 +129,8 @@ $(document).ready(function rend() {
 
 
   removeaffirm = function (thielem, dataid) {
+    var playerId=$("#holeplayer").data('id');
+    
     var dataf = {
       'x': thielem,
       'y': dataid
@@ -141,7 +138,14 @@ $(document).ready(function rend() {
     console.log(dataf)
     //$("#removeanyway").click(thielem, function () {
     $("#removeanyway").bind("click", dataf, function (e) {
-
+      if(playerId== dataid){
+        $('#song-playlist').empty();
+        $("#my_audio").trigger('pause');
+        $('#playlistnametop').empty();
+        $('#songname').empty();
+        $("#sound_src").attr("src", "");
+        closeWindow();
+      }
 
        
       dataf.x.remove();
@@ -155,15 +159,24 @@ $(document).ready(function rend() {
 
     });
   }
+  function closeWindow(){
+    $("#my_audio").trigger('pause');
+    
+        $("#playlists").addClass("martop");
+     
+      $("#holeplayer").hide();
+    };   
 
   
   $("#playlists").on("click", ".editlist", function () {
+    
     console.log(this);
     var dataid = $(this).parent().attr("data-id");
     editList(dataid);
     console.log($( "#editplaylistname" ).data( "id" ))
   })
     function editList(dataid){
+      $("#editnext").hide();
     $.get("http://localhost/playlist/api/playlist/"+dataid, function (data, status) {
     
     $.each(data, function (index, playlist) {
@@ -265,6 +278,7 @@ $(document).ready(function rend() {
         });
       }
       $("#saveeditedsongs").click(function () {
+        
         var editcurrent=$("#current").data('current');
         var editid=$(this).parent().prev().attr("i");
         console.log(editcurrent);
@@ -272,6 +286,7 @@ $(document).ready(function rend() {
         var songArray = [];
         var songsUrl=[]
         var playerId=$("#holeplayer").data('id');
+        if(songArray.length>0){
         if(!editcurrent||editid==playerId){
         $('#song-playlist').empty()
         }
@@ -295,7 +310,11 @@ $(document).ready(function rend() {
          
     
         });
+      }
         if(!editcurrent||editid==playerId){
+          if(songArray.length<1){
+            return alert("must be at list one song")
+          }
           $('span[data-songnum]').parent().removeClass("playing-song");
           editcurrent=true;
           $("#current").data('current',editcurrent);

@@ -129,8 +129,13 @@ margin-top: 320px;
     }
     .playing-song{
         width:200px;
-        background-color: brown;
-
+        /* background-color: brown; */
+        margin-left: -10px;
+    }
+    .song-on-pause{
+        margin-left: -10px;
+        
+        
     }
     
     #editeraseplayer{
@@ -281,6 +286,9 @@ margin-top: 320px;
         #editsongsdiv{
             height:200px;
             overflow: auto;
+        }
+        #songname{
+            margin-left: 70px;
         }
         
 
