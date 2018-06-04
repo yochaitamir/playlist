@@ -14,6 +14,7 @@
     crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="js/main.js"></script>
+  <script type="text/javascript" src="js/search.js"></script>
   <script
   src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
   integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="
@@ -63,27 +64,24 @@
       <form class="navbar-form navbar-left">
         <div class="input-group">
           <input type="text" class="form-control" placeholder="Search">
+          
           <span class="input-group-btn">
             <button type="button" class="btn btn-default">
               <span class="glyphicon glyphicon-search"></span>
             </button>
           </span>
         </div>
+        
       </form>
+      
+      
 
     </div>
-  </nav>
-  <nav class="navbar navbar-light bg-light justify-content-between">
-    <span class=left>Add playlist</span>
-    <a class="navbar-brand" data-toggle="modal" data-target="#addModalpre" id="addsonglist">+</a>
-    <form class="form-inline">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search playlist" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-    </nav> 
-    <script>
-   
-    </script>
+    
+  </nav><br><br><br>
+  <div id="searchlist"></div>
+  
+    
   <div id=holeplayer data-id="">
     
     <div id='player' >
@@ -102,7 +100,7 @@
       <div id="cd" class="rotating">
         
 
-        <i class="fas fa-pause pauseplayer" style="color:black"></i>
+        <i id=pauseplayer class="fas fa-pause" style="color:black"></i>
       </div>
       <audio id="my_audio" controls>
         

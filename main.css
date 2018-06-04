@@ -211,8 +211,24 @@ margin-top: 320px;
         width:200px;
         margin-left:110px;
     }
-    .pauseplayer{
+    #pauseplayer{
         margin-top: 105px;
+    }
+    #searchlist{
+        margin-left: 100px;
+        width: 300px;
+        height:auto;
+        color:black;
+        background-color: aliceblue;
+        /* margin-left: -70%; */
+    }
+    @media only screen and (max-width: 600px) {
+        #searchlist {
+            width: 200px;
+            margin-top:120px;
+            background-color: aliceblue;
+            margin-left: 100px;
+        }
     }
     
     

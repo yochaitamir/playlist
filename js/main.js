@@ -203,11 +203,11 @@ $(document).ready(function rend() {
       var image=$("#editimageurl").val();
       if (imageval(image)) {
         var playerId=$("#holeplayer").data('id');
-        
+        if(!editcurrent||editid==playerId){
           $("#cd").css("background-image",'url(' + image + ')');
           $("#playlistnametop").html(name);
 
-        
+        }
         
         alert('Great, you entered an image url');
         $(".imageforthumbs").attr("src", image);
@@ -286,7 +286,7 @@ $(document).ready(function rend() {
         var songArray = [];
         var songsUrl=[]
         var playerId=$("#holeplayer").data('id');
-        if(songArray.length>0){
+        
         if(!editcurrent||editid==playerId){
         $('#song-playlist').empty()
         }
@@ -303,14 +303,14 @@ $(document).ready(function rend() {
             'name': name,
             'url': url
           });
-           
+          console.log(songArray)
           if(!editcurrent||editid==playerId){
           $("#song-playlist").append("<div><span class='pauseicon' data-songnum=" + index + " ><i class='fas fa-pause' style='color:black'></i></span><span class='play-icon' data-songnum=" + index + "><i class='fas fa-play' ></i></span><span class='songlink' data-songnum=" + index + " data-song=" + url + ">" + name + "</span></div>");
           }
          
     
         });
-      }
+     
         if(!editcurrent||editid==playerId){
           if(songArray.length<1){
             return alert("must be at list one song")
@@ -322,9 +322,11 @@ $(document).ready(function rend() {
         playingsongarray=$("#songstoplay").data('arr');
         playingsrc=$("#sound_src").attr("src");
         songindex=playingsongarray.indexOf( playingsrc );
+        console.log(songindex);
         $('span[data-songnum=' + songindex + ']').parent().addClass("playing-song");
         if(songindex==-1){
           $("#my_audio").trigger('pause');
+         
         }
         
         }

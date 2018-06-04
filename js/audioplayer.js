@@ -12,6 +12,7 @@ $(document).ready(function () {
     })
 
         function playerOn(chosenplaylist){
+            $("#cd").addClass("rotating");
             $("#holeplayer").show("bounce");
         $("#playlists").removeClass("martop");
         var songstoplay = []
@@ -82,8 +83,8 @@ $(document).ready(function () {
                 }else{
                     $("#cd").addClass("rotating");
                 }
-                console.log(arr);
-                console.log("click");
+               
+                
                 songnum=$("#songnum").val()
                 var songname=$(this).text()
                 $("#songname").html(songname)
@@ -111,35 +112,48 @@ $(document).ready(function () {
 
 
             })
-            
+            x=document.getElementById("my_audio")
+            x.addEventListener("pause",  function () {
+                pauseSong();
+            });
+            x.addEventListener("play",  function () {
+                playSong();
+            });
+            $("#cd").click(function(){
+              if($(".pauseicon").parent().hasClass("playing-song")){
+                pauseSong(); 
+              }else{
+                playSong();
+              }
+            })
             
             $("#song-playlist").on("click",".pauseicon" ,function () {
-                if ($(this).parent().hasClass("playing-song")) {
+                pauseSong();
+            })
+            function pauseSong(){
+                if ($(".pauseicon").parent().hasClass("playing-song")) {
                     $("#my_audio").trigger('pause');
                     $('span[data-songnum=' + songnum + ']').parent().removeClass("playing-song");
                     $('span[data-songnum=' + songnum + ']').parent().addClass("song-on-pause");
                     $("#cd").removeClass("rotating");
-                } //else if ($(this).parent().hasClass("song-on-pause")) {
-                //     //$("#my_audio").trigger('load');
-                //     $("#my_audio").trigger('play');
-                //     $('span[data-songnum=' + songnum + ']').parent().removeClass("song-on-pause");
-                //     $('span[data-songnum=' + songnum + ']').parent().addClass("playing-song");
-                // }
-            })
-            
+                    $("#pauseplayer").remove();
+                    $("#cd").append('<i id="pauseplayer" class="fas fa-play" style="color:black"></i>')
+                } 
+            }
+        
             $("#song-playlist").on("click",".play-icon" ,function () {
-                if ($(this).parent().hasClass("song-on-pause")) {
+                playSong();
+            })
+            function playSong(){
+                if ($(".play-icon").parent().hasClass("song-on-pause")) {
                     $("#my_audio").trigger('play');
                     $('span[data-songnum=' + songnum + ']').parent().removeClass("song-on-pause");
                     $('span[data-songnum=' + songnum + ']').parent().addClass("playing-song");
                     $("#cd").addClass("rotating");
-                 } //else if ($(this).parent().hasClass("song-on-pause")) {
-                //     //$("#my_audio").trigger('load');
-                //     $("#my_audio").trigger('play');
-                //     $('span[data-songnum=' + songnum + ']').parent().removeClass("song-on-pause");
-                //     $('span[data-songnum=' + songnum + ']').parent().addClass("playing-song");
-                // }
-            })
+                    $("#pauseplayer").remove();
+                    $("#cd").append('<i id="pauseplayer" class="fas fa-pause" style="color:black"></i>')
+                 } 
+            }
 
         
       
@@ -148,10 +162,14 @@ $(document).ready(function () {
         arr=$("#songstoplay").data('arr');
         console.log(songstoplay);
         if(songnum<arr.length-1){
-        
-        songnum=$("#songnum").val()
-        $(".play-icon").hide()
+            $("#cd").addClass("rotating");
+            $("#pauseplayer").remove();
+            $("#cd").append('<i id="pauseplayer" class="fas fa-pause" style="color:black"></i>')
+        songnum=$("#songnum").val();
+        $(".play-icon").hide();
+        //$("playing-song").removeClass("playing-song");
         $('span[data-songnum=' + songnum + ']').parent().removeClass("playing-song");
+        $('span[data-songnum=' + songnum + ']').parent().removeClass("song-on-pause");
         songnum++;
         var songname=$('span[data-songnum=' + songnum + ']').parent().find(".songlink").html()
     console.log(songname);
@@ -178,8 +196,45 @@ $(document).ready(function () {
             $("#playlists").addClass("martop");
          
           $("#holeplayer").hide();
-        };   
-   
+        }; 
+        
+        $(".input-group-btn").click(function(){
+            var searchstr=$(".form-control").val();
+            $("#searchlist").empty();
+            if(searchstr.length>1){
+            
+            
+            $.get("http://localhost/playlist/api/playlist", function (data, status) {
+                
+                $.each(data, function (index, playlist) {
+                  
+                  $.each(playlist, function (index, playlis) {
+                      console.log();
+                    if(playlis.name.indexOf(searchstr) != -1){
+                        console.log("exist");
+                     $("#searchlist").append("<span class='pickedsong' data-id="+playlis.id+">"+playlis.name+"</span><br>")   
+            
+                    }
+                    
+                  });
+                });
+            
+                
+              });
+            
+            
+            }
+            $("#searchlist").on("click",".pickedsong",function(){
+                chosenplaylist=$(this).data("id");
+                playerOn(chosenplaylist);
+                $("#searchlist").empty()
+            
+            })
+            
+            })
+            
+             
+    
     
    
 
