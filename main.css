@@ -30,7 +30,7 @@
     left:220px;
 }
 .playlist{
-    z-index: -1;
+    /* z-index: -2; */
     width:130px;
     margin-left: 10px;
     float: left;
@@ -81,7 +81,7 @@
     transition-property: all;
 	transition-duration: .5s;
 	transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
-    z-index: -1;
+    
 margin-top: 320px;
 }
  #playlists.martop{
@@ -94,9 +94,7 @@ margin-top: 320px;
     
     margin-top: 100px; 
 }
-/* #navfixed{
-    position: fixed;
-} */
+
 #player{
     position: fixed;
     top:70px;
@@ -106,7 +104,7 @@ margin-top: 320px;
     background-image:  url("images/player-bg.png");
     margin: 0 auto;
     padding-top: 10px;
-    z-index: 100;
+    z-index: 111;
     float: left;
 }
 #cd{
@@ -114,8 +112,7 @@ margin-top: 320px;
     height:220px;
     border-radius: 50%;
     position: absolute;
-    /* top:63px; */
-    /* margin-top: 63px; */
+    
     margin-left: 5px;
      background-image: url("https://images2.onionstatic.com/clickhole/3564/7/original/600.jpg"); 
      background-size: contain;
@@ -129,7 +126,7 @@ margin-top: 320px;
     }
     .playing-song{
         width:200px;
-        /* background-color: brown; */
+       
         margin-left: -10px;
     }
     .song-on-pause{
@@ -146,9 +143,7 @@ margin-top: 320px;
         
         
     }
-    /* .playing-song:hover{
-        background-color: aquamarine;
-    } */
+    
     
      .pauseicon .fa-pause{
         
@@ -215,19 +210,22 @@ margin-top: 320px;
         margin-top: 105px;
     }
     #searchlist{
+        position:relative;
         margin-left: 100px;
         width: 300px;
         height:auto;
         color:black;
         background-color: aliceblue;
-        /* margin-left: -70%; */
+        z-index: 999;
     }
     @media only screen and (max-width: 600px) {
         #searchlist {
+            position:relative;
             width: 200px;
             margin-top:120px;
             background-color: aliceblue;
             margin-left: 100px;
+            z-index: 999;
         }
     }
     
@@ -304,7 +302,7 @@ margin-top: 320px;
             overflow: auto;
         }
         #songname{
-            margin-left: 70px;
+            margin-left: 90px;
         }
         
 
